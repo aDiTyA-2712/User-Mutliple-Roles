@@ -14,7 +14,7 @@ import logging
 from .forms import UserRegistrationForm
 logger = logging.getLogger(__name__)
 
-
+#for listing all the users
 class UserListView(APIView):
     def get(self,request):
 
@@ -28,7 +28,7 @@ class UserListView(APIView):
             post_serialzer.save()
             return Response(post_serialzer.data,status=status.HTTP_201_CREATED)
         return Response(post_serialzer.errors)
-    
+#for user updating data baed on username   
 class UserUpdateView(APIView): 
     def get_user(self,username):
         try:
@@ -61,7 +61,7 @@ class UserUpdateView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
     
-
+#for logging in the user
 class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -91,8 +91,9 @@ class LoginView(APIView):
             return Response(
                 {"error": "Invalid credentials"},
                 status=status.HTTP_401_UNAUTHORIZED
-            )    
-        
+            )   
+
+#for authenticating the user           
 class UserDetailsView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -113,7 +114,7 @@ def add_user(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('user_list')  # Replace with your desired redirection URL
+            return redirect('user_list')  # user_list haven't implemented yet
     else:
         form = UserRegistrationForm()
     return render(request, 'add_user.html', {'form': form})
