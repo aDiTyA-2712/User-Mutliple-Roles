@@ -1,0 +1,52 @@
+<!-- templates/add_user.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+    <style>
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add New User</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_username" class="required-field">Username</label>
+            {{ form.username }}
+        </div>
+        <div>
+            <label for="id_firstname" class="required-field">First Name</label>
+            {{ form.firstname }}
+        </div>
+        <div>
+            <label for="id_middlename">Middle Name</label>
+            {{ form.middlename }}
+        </div>
+        <div>
+            <label for="id_lastname" class="required-field">Last Name</label>
+            {{ form.lastname }}
+        </div>
+        <div>
+            <label for="id_password" class="required-field">Password</label>
+            {{ form.password }}
+        </div>
+        <div>
+            <label for="id_email" class="required-field">Email</label>
+            {{ form.email }}
+        </div>
+        <div>
+            <label for="id_description">Description</label>
+            {{ form.description }}
+        </div>
+        <div>
+            <label>Roles</label>
+            {{ form.roles }}
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
